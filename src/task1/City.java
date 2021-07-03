@@ -1,5 +1,6 @@
-package model;/*
-    модель model.City с полями:
+package task1;
+/*
+    модель City с полями:
         name – наименование города
         region - регион
         district – федеральный округ
@@ -14,17 +15,12 @@ public class City {
     private int population; // количество жителей города
     private String foundation; // дата основания или первое упоминание
 
-    public City(String [] params) {
-        //С допущением, что первые три критерия есть у всех городов в файле
-        this.name = params[1];
-        this.region = params[2];
-        //Если массив содержит необходимые данные (у некоторых городов в файле отсутствует год основания)
-        if(params.length > 3)
-            this.district = params[3];
-        if(params.length > 4)
-            this.population = Integer.parseInt(params[4]);
-        if(params.length == 6)
-            this.foundation = params[5];
+    public City(String name, String region, String district, int population, String foundation) {
+        this.name = name;
+        this.region = region;
+        this.district = district;
+        this.population = population;
+        this.foundation = foundation;
     }
 
     public String getName() {
@@ -69,7 +65,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "model.City{" +
+        return "City{" +
                 "name='" + name + '\'' +
                 ", region='" + region + '\'' +
                 ", district='" + district + '\'' +
