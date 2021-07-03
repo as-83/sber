@@ -1,55 +1,55 @@
 package task2;
 
-import model.City;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-
 /*
-    Необходимо реализовать класс task1.Main, используя java.util.Scanner, прочесть информацию из текстового
-    представления справочника и разложить данные в модель model.City с полями:
-        name – наименование города
-        region - регион
-        district – федеральный округ
-        population – количество жителей города
-        foundation – дата основания или первое упоминание
-        Полученный список объектов model.City нужно вывести в консоль.
+    Задание 2.
+    Необходимо реализовать следующие варианты сортировки:
 
-    Пример полученного результата:
-        model.City{name='Адыгейск', region='Адыгея', district='Южный', population=12248, foundation='1973'}
-        model.City{name='Майкоп', region='Адыгея', district='Южный', population=144246, foundation='1857'}
-        model.City{name='Горно-Алтайск', region='Алтай', district='Сибирский', population=56928, foundation='1830'}
+    Сортировка списка городов по наименованию в алфавитном порядке по убыванию без учета регистра;
+    Сортировка списка городов по федеральному округу и наименованию города внутри каждого федерального округа в алфавитном порядке по убыванию с учетом регистра;
+    Вывести полученный список объектов City в консоль. При реализации сортировки обратить внимание на возможные варианты реализации: Comporator, lambda-выражения.
+
+    Пример полученного результата для сортировки по наименованию:
+
+    City{name='Абаза', region='Хакасия', district='Сибирский', population=17111, foundation='1867'}
+
+    City{name='Абакан', region='Хакасия', district='Сибирский', population=165183, foundation='1931'}
+
+    City{name='Абдулино', region='Оренбургская область', district='Приволжский', population=20663, foundation='1795'}
+
+    …
+
+    Пример полученного результата для сортировки по двум полям справочника – федеральному округу и наименованию города:
+
+    City{name='Алдан', region='Якутия', district='Дальневосточный', population=21277, foundation='1924'}
+
+    City{name='Александровск-Сахалинский', region='Сахалинская область', district='Дальневосточный', population=10613, foundation='1869'}
+
+    City{name='Амурск', region='Хабаровский край', district='Дальневосточный', population=42977, foundation='1958'}
+
+    …
+
+    City{name='Абдулино', region='Оренбургская область', district='Приволжский', population=20663, foundation='1795'}
+
+    City{name='Агидель', region='Башкортостан', district='Приволжский', population=16365, foundation='1980'}
+
+    City{name='Агрыз', region='Татарстан', district='Приволжский', population=19299, foundation='1646'}
+
+    …
 */
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = null;
-        try {
-            sc = new Scanner(new File("city_ru.csv"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String [] cityParams;
-        List<City> cities = new ArrayList<>();
+        //Получение списка городов из файла
+        List<City> cities = CityUtils.parse();
 
-        while(sc.hasNext()){
-            cityParams = sc.nextLine().split(";");
-            cities.add(new City(cityParams));
-        }
-
-        sc.close();
-
-        //Сортировка списка городов по наименованию в алфавитном порядке по убыванию без учета регистра;
-       cities.stream().sorted(Comparator.comparing(city -> city.getName().toLowerCase())).forEach(city -> System.out.println(city));
-
-        //Сортировка списка городов по федеральному округу и наименованию города внутри каждого
-        // федерального округа в алфавитном порядке по убыванию с учетом регистра;
-        cities.stream().sorted(Comparator.comparing(City::getDistrict).thenComparing(City::getName)).forEach(city -> System.out.println(city));
-
+        //Вывод списка городов, отсортированных по имени
+        CityUtils.printSortedByNameIgnoreCase(cities);
+        System.out.println("\n\n\n\n\n" +
+                "-----------------------------------------------");
+        //Вывод списка городов, отсортированных по федеральному округу и имени
+        CityUtils.printSortedByDistrictAndName(cities);
     }
 
 }

@@ -12,9 +12,9 @@ package task1;
         Полученный список объектов task1.City нужно вывести в консоль.
 
     Пример полученного результата:
-        task1.City{name='Адыгейск', region='Адыгея', district='Южный', population=12248, foundation='1973'}
-        task1.City{name='Майкоп', region='Адыгея', district='Южный', population=144246, foundation='1857'}
-        task1.City{name='Горно-Алтайск', region='Алтай', district='Сибирский', population=56928, foundation='1830'}
+        City{name='Адыгейск', region='Адыгея', district='Южный', population=12248, foundation='1973'}
+        City{name='Майкоп', region='Адыгея', district='Южный', population=144246, foundation='1857'}
+        City{name='Горно-Алтайск', region='Алтай', district='Сибирский', population=56928, foundation='1830'}
 */
 
 public class Main {
