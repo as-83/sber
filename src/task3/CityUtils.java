@@ -46,30 +46,4 @@ public class CityUtils {
         return new City(name, region, district, population, foundation);
     }
 
-    /**
-     * Преобразование списка городов в массив и поиск путем перебора массива
-     * индекса   элемента и значения с наибольшим количеством жителей
-     *
-     * @return строка массива с индексом элемента с наибольшим количеством жителей
-     * и количеством жителей
-     */
-    public static String getMaxPopulationIndex() {
-        //Получение списка городов из файла
-        List<City> cities = parse();
-
-        //Преобразование списка городов в массив
-        City[] citiesArray = cities.toArray(new City[0]);
-        int maxPopulation = 0;
-        int maxPopulationIndex = 0;
-
-        //Поиск индекса элемента и значения с наибольшим количеством жителей
-        for (int i = 0; i < citiesArray.length; i++) {
-            if(citiesArray[i].getPopulation() > maxPopulation) {
-                maxPopulation = citiesArray[i].getPopulation();
-                maxPopulationIndex = i;
-            }
-        }
-
-        return "[" + maxPopulationIndex + "] = " + maxPopulation;
-    }
 }
